@@ -6,6 +6,5 @@ import entity.ProductEntity;
 
 public interface ProductConverter
 {
-	public ProductEntity convertDataToModel(ProductRequestData productData);
-	public ResponseData convertToResponse(Object model, boolean status, String message);
+	ProductEntity convertDataToModel(ProductRequestData productData);
 }

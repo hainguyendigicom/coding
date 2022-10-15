@@ -133,6 +133,8 @@ public final class B2BCoreConstants
 		String SHARED_SAVED_CART_FAIL = "Share Saved Cart Fail";
 
 		String SHARED_SAVED_CART_NOT_EXIST = "Saved Cart Does Not Exist";
+
+		String ADD_PRODUCT_TO_CART_FAIL = "Add product to cart fail";
 	}
 
 	public interface CUSTOMER_ROLE

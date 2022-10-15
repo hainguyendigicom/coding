@@ -41,7 +41,7 @@ public class B2bProduct
     private int type;
 
     @JsonProperty(value = "categoryNames")
-    private List<String> categoryNames;
+    String categoryNames;
 
     @JsonProperty(value = "suggestName")
     private String suggestName;

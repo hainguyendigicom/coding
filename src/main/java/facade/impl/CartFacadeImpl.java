@@ -1,48 +1,48 @@
 package facade.impl;
 
 import constant.B2BCoreConstants;
+import converter.CartConverter;
 import converter.CommonConverter;
-import converter.ProductConverter;
 import dto.ResponseData;
-import dto.request.ProductRequestData;
-import entity.ProductEntity;
-import facade.ProductFacade;
+import dto.request.CartRequestData;
+import entity.CartEntity;
+import facade.CartFacade;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import service.ProductService;
+import service.CartService;
 
-import javax.transaction.Transactional;
+import java.util.Objects;
 
 
 @Service
-public class ProductFacadeImpl implements ProductFacade
+public class CartFacadeImpl implements CartFacade
 {
+	private final Logger LOGGER = LoggerFactory.getLogger(CartFacadeImpl.class);
 	@Autowired
-	private ProductService productService;
+	private CartService cartService;
 	@Autowired
-	private ProductConverter productConverter;
+	private CartConverter cartConverter;
 	@Autowired
 	private CommonConverter commonConverter;
-	private final Logger LOGGER = LoggerFactory.getLogger(ProductFacadeImpl.class);
 
 	@Override
-	@Transactional
-	public ResponseData createProduct(final ProductRequestData productRequestData)
+	public ResponseData addToCart(final CartRequestData requestData)
 	{
-		ProductEntity model = null;
 		String message = B2BCoreConstants.MESSAGE.SUCCESS;
 		try
 		{
-			if (productRequestData != null)
+			if (Objects.nonNull(requestData))
 			{
-				model = productConverter.convertDataToModel(productRequestData);
-				final boolean isCreated = productService.saveOrUpdate(model);
+				CartEntity cartEntity = cartConverter.convertDataToModel(requestData);
+				final boolean isCreated = cartService.saveCart(cartEntity);
 				if (isCreated)
 				{
-					return commonConverter.convertToResponse(model, true, message);
+					return commonConverter.convertToResponse(cartEntity, true, message);
 				}
 			}
 		}
@@ -56,7 +56,7 @@ public class ProductFacadeImpl implements ProductFacade
 
 			}
 		}
-		return commonConverter.convertToResponse(null, false, B2BCoreConstants.MESSAGE.CREATE_FAIL);
+		return commonConverter.convertToResponse(null, false, B2BCoreConstants.MESSAGE.ADD_PRODUCT_TO_CART_FAIL);
 	}
 
 }
