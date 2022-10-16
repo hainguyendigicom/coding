@@ -41,7 +41,7 @@ public class B2bProduct
     private int type;
 
     @JsonProperty(value = "categoryNames")
-    String categoryNames;
+    List<String> categoryNames;
 
     @JsonProperty(value = "suggestName")
     private String suggestName;
@@ -63,6 +63,9 @@ public class B2bProduct
 
     @JsonProperty(value = "branchId")
     private String branchId;
+
+    @JsonProperty(value = "colour")
+    private String colour;
 
     @JsonProperty(value = "stock")
     private Boolean stock;

@@ -8,7 +8,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,8 @@ import java.util.List;
 public class IndexProductConverterImpl implements IndexProductConverter
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(IndexProductConverterImpl.class);
-
+	@Autowired
+	private CategoryRepository categoryRepository;
 	@Override
 	public List<B2bProduct> convertToB2bProduct(final List<ProductEntity> productEntities,
 			final List<CategoryEntity> categoryEntities)
@@ -62,9 +65,19 @@ public class IndexProductConverterImpl implements IndexProductConverter
 				product.setBranchId(productEntity.getBranchId());
 				product.setStock(productEntity.isStock());
 				product.setPrice(productEntity.getProductPrice());
-				product.setCategoryNames(productEntity.getCategories());
+				product.setColour(productEntity.getColour());
+				product.setCategoryNames(populateCategories(productEntity));
 			}
 		}
 		return product;
+	}
+	private List<String> populateCategories(ProductEntity productEntity) {
+		List<Integer> categoriesList = new ArrayList<>();
+		String[] category = productEntity.getCategories().split(",");
+		for (int i=0; i<category.length;i++)
+		{
+			categoriesList.add(Integer.parseInt(category[i]));
+		}
+		return categoryRepository.getCategoryNamesByIds(categoriesList);
 	}
 }

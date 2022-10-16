@@ -31,7 +31,7 @@ public class ProductEntity extends CommonEntity implements Serializable {
     @Column(name = "product_image")
     private String productImageUrl;
 
-    @Column(name = "product_sku", unique = true)
+    @Column(name = "product_sku")
     private String sku;
 
     @Column(name = "product_categories")

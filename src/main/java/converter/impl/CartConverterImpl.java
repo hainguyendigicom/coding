@@ -7,7 +7,9 @@ import entity.CartEntity;
 import entity.CustomsItemModel;
 import entity.LineItemEntity;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;

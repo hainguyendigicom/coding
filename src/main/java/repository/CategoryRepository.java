@@ -16,4 +16,6 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<CategoryEntity, String>
 {
     List<CategoryEntity> findAllByIsDeleted(boolean isDeleted);
+    @Query("select e.categoryName from CategoryEntity e where e.categoryId in :categoriesId and e.isDeleted = 0")
+    List<String> getCategoryNamesByIds (@Param("categoriesId") List<Integer> categoriesId);
 }

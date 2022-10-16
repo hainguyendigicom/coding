@@ -15,9 +15,6 @@ import lombok.Setter;
 @Setter
 public class ProductRequestData extends ProductData
 {
-    /**
-     * 
-     */
     private static final long serialVersionUID = -4806334519886048057L;
 
     @JsonProperty("size")
