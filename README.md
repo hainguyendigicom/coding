@@ -17,7 +17,19 @@
 
 3/ **Start project**<br/>
 `Step 1: Start demo project`<br/>
-``<br/>
+`clone source in coding repository`<br/>
+`cd coding folder`<br/>
+`mvn clean install`<br/>
+`mvn spring-boot:run`<br/>
+`Step 2: Start b2b platform`<br/>
+`clone source in search repository`<br/>
+`cd b2bcore`<br/>
+`mvn clean install`<br/>
+`cd searchcustomapi`<br/>
+`mvn spring-boot:run`<br/>
+`Step 3: Install Elastic Search 7.14.0`<br/>
+`For Windows: https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html`<br/>
+`For Linux: https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html`<br/>
 
 4/ **Full CURL commands to verify the APIs**<br/>
 
